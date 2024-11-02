@@ -10,6 +10,12 @@ from joiner import Joiner
 
 # Function to read CSV files from a directory
 def load_data_from_directory(directory):
+    # If the directroy doesn't exist, create it
+    try:
+        os.listdir(directory)
+    except FileNotFoundError:
+        os.mkdir(directory)
+
     return [f for f in os.listdir(directory)]
 
 # Function to save uploaded files
@@ -19,6 +25,8 @@ def save_uploaded_file(uploaded_file, save_path):
 
 # Load the wishlists and sharelists
 cwd = os.getcwd()
+# If data/ doesn't exist, create it
+_ = load_data_from_directory(os.path.join(cwd, 'data'))
 wishlist_dir = os.path.join(cwd, 'data/wishlists')
 sharelist_dir = os.path.join(cwd, 'data/sharelists')
 
